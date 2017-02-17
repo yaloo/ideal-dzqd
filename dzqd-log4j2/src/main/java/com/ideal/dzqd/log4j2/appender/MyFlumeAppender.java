@@ -29,7 +29,7 @@ import org.apache.logging.log4j.flume.appender.FlumePersistentManager;
  * It can distinguish between different data sources,
  * so as to create conditions for the preservation of the classification of the log
  *
- * this is extend from {@link org.apache.logging.log4j.flume.appender.FlumeAppender}
+ * this class extend from {@link org.apache.logging.log4j.flume.appender.FlumeAppender}
  *
  * this package needs to be integrated into your's app, and your app log4j2 configuration like this:
  * &ltconfiguration status="off" <b>package="com.ideal.dzqd.log4j2"</b> &gt
@@ -40,7 +40,7 @@ import org.apache.logging.log4j.flume.appender.FlumePersistentManager;
  *
  * the bold element must be configuration.
  *
- * the flume config:
+ * the server side flume config:
  * <pre>
  * agent.sources = avrosrc
  * agent.channels = memoryChannel c2 c3
