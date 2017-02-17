@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="off" package="com.ideal.dzqd.log4j2">
+  <Appenders>
+    <Console name="console-log" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+    </Console>
+    <MyFlume name="loggers" type="Avro" source="test2" compress="false">
+      <Agent host="127.0.0.1" port="23007" />
+      <PatternLayout charset="UTF-8" pattern="%X{ip} %X{pid} %X{appName} %X{operator} %X{tag} %d{yyyy-MM-dd HH:mm:ss} %-5level %t %C %M %L %m%n" />
+      <Filters>
+        <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>
+        <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+      </Filters>
+    </MyFlume>
+  </Appenders>
+  <Loggers>
+    <Root level="INFO">
+      <appender-ref ref="loggers"/>
+    </Root>
+  </Loggers>
+</configuration>
