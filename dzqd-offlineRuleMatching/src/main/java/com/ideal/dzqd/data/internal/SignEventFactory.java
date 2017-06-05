@@ -1,4 +1,4 @@
-package com.ideal.dzqd.data;
+package com.ideal.dzqd.data.internal;
 
 import com.ideal.dzqd.data.po.SceneChannelSale;
 import com.ideal.dzqd.data.tools.MysqlTools;
@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
+ * 创建SignEvent式厂类
  * Created by yaloo on 2017/5/30.
  */
 public class SignEventFactory implements EventFactory<SignEvent> {

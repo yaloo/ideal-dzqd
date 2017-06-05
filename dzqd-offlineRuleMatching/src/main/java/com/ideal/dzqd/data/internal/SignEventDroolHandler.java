@@ -1,4 +1,4 @@
-package com.ideal.dzqd.data;
+package com.ideal.dzqd.data.internal;
 
 import com.google.inject.Singleton;
 import com.ideal.dzqd.data.vo.SignEvent;

@@ -1,4 +1,4 @@
-package com.ideal.dzqd.data;
+package com.ideal.dzqd.data.internal;
 
 import com.google.common.base.Joiner;
 import com.ideal.dzqd.data.po.SceneChannelSale;

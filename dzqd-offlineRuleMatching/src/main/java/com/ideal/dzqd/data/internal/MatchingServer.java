@@ -1,4 +1,4 @@
-package com.ideal.dzqd.data;
+package com.ideal.dzqd.data.internal;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
@@ -10,6 +10,7 @@ import com.google.inject.Injector;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import com.ideal.dzqd.data.conf.AppConfig;
+import com.ideal.dzqd.data.vo.DownloadEvent;
 import com.ideal.dzqd.data.vo.SignEvent;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.netflix.governator.guice.LifecycleInjector;
@@ -123,8 +124,6 @@ public final class MatchingServer extends AbstractService {
 
     @Inject
     private SignEventDroolHandler droolHandler;
-    @Inject
-    private SignEventOrderHandler orderHandler;
     @Inject
     private SignEventInDBHandler inDBHandler;
 

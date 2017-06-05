@@ -1,7 +1,8 @@
-package com.ideal.dzqd.data;
+package com.ideal.dzqd.data.internal;
 
 import com.google.common.base.Strings;
 import com.ideal.dzqd.data.vo.AnhuiEvent;
+import com.ideal.dzqd.data.vo.DownloadEvent;
 import com.ideal.dzqd.data.vo.HunanEvent;
 import com.ideal.dzqd.data.vo.SignEvent;
 import com.lmax.disruptor.EventTranslator;

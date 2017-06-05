@@ -1,5 +1,8 @@
 package com.ideal.dzqd.data;
 
+import com.ideal.dzqd.data.vo.DownloadEvent;
+import com.ideal.dzqd.data.internal.MatchingServer;
+
 /**
  * Hello world!
  *

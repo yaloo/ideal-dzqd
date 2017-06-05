@@ -1,4 +1,4 @@
-package com.ideal.dzqd.data;
+package com.ideal.dzqd.data.vo;
 
 import java.util.EventObject;
 

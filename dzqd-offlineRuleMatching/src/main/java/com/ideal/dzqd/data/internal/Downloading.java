@@ -1,10 +1,11 @@
-package com.ideal.dzqd.data;
+package com.ideal.dzqd.data.internal;
 
 import com.google.common.eventbus.EventBus;
 import com.google.inject.Inject;
 import com.ideal.dzqd.data.conf.AppConfig;
 import com.ideal.dzqd.data.tools.FtpClientUtils;
 import com.ideal.dzqd.data.tools.ZipUtils;
+import com.ideal.dzqd.data.vo.DownloadEvent;
 import java.io.IOException;
 import java.util.List;
 import org.apache.logging.log4j.util.Strings;
@@ -36,7 +37,7 @@ public class Downloading {
     String localUnzipFile = Strings.join(files, ',').replaceAll(".gz","");
     event.setLocalPath(localUnzipFile);
 
-    // TODO 解压文件
+    // 解压文件
     for(String file : files) {
       ZipUtils.gunzip(file);
     }
