@@ -10,6 +10,17 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>dzqd-es</artifactId>
-
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.hive</groupId>
+      <artifactId>hive-jdbc</artifactId>
+      <version>0.12.0-cdh5.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-common</artifactId>
+      <version>2.3.0-cdh5.0.0</version>
+    </dependency>
+  </dependencies>
 
 </project>

@@ -1,0 +1,45 @@
+package com.ideal.dzqd.rule.anhui;
+
+import com.ideal.dzqd.data.vo.AnhuiEvent;
+rule "allinone"
+    salience 3
+    when
+    	$e : AnhuiEvent()
+    then
+      if("8903013200020001".equals($e.getSaleid())){
+        $e.setSubSceneId("101416");
+      }
+      if("8903013200020002".equals($e.getSaleid())){
+        $e.setSubSceneId("101417");
+      }
+      if("8903013200020003".equals($e.getSaleid())){
+        $e.setSubSceneId("101418");
+      }
+      if("8903013200020004".equals($e.getSaleid())){
+        $e.setSubSceneId("101419");
+      }
+      if("8903013200020005".equals($e.getSaleid())){
+        $e.setSubSceneId("101420");
+      }
+      if("8903013200020006".equals($e.getSaleid())){
+        $e.setSubSceneId("101421");
+      }
+      if("8903013200020007".equals($e.getSaleid())){
+        $e.setSubSceneId("101422");
+      }
+      if("8903013200020008".equals($e.getSaleid())){
+        $e.setSubSceneId("101423");
+      }
+      if("8903013200020009".equals($e.getSaleid())){
+        $e.setSubSceneId("101424");
+      }
+      if("8903013200020010".equals($e.getSaleid())){
+        $e.setSubSceneId("101425");
+      }
+      if("8903013200020011".equals($e.getSaleid())){
+        $e.setSubSceneId("101426");
+      }
+      if("8903013200020012".equals($e.getSaleid())){
+        $e.setSubSceneId("101427");
+      }
+end

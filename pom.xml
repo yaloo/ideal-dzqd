@@ -19,6 +19,7 @@
         <module>dzqd-rabbitmq-consumer</module>
         <module>dzqd-rockmq-consumer</module>
         <module>dzqd-log4j2</module>
+        <module>dzqd-es</module>
     </modules>
     <dependencyManagement>
         <dependencies>

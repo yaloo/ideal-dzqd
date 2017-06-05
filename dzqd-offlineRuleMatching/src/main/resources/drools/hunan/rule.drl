@@ -1,0 +1,25 @@
+package com.ideal.dzqd.rule.hunan;
+
+import com.ideal.dzqd.data.vo.HunanEvent;
+import com.google.common.base.Strings;
+
+rule "allinone"
+    salience 3
+    when
+    	$e : HunanEvent()
+    then
+      String subSceneId = "";
+
+      if("1".equals($e.getIptv())){
+        subSceneId = subSceneId + ",101410,101411";
+      }
+      if("1".equals($e.getOverflow())){
+        subSceneId = subSceneId + ",101412,101413";
+      }
+
+      if("1".equals($e.getBestpay())){
+        subSceneId = subSceneId + ",101414,101415";
+      }
+
+      $e.setSubSceneId(subSceneId);
+end

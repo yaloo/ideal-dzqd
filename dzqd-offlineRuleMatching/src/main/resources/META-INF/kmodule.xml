@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kmodule xmlns="http://jboss.org/kie/6.0.0/kmodule">
+    <kbase name="rulehunan" packages="drools.hunan">
+        <ksession name="tag_hunan"/>
+    </kbase>
+    <kbase name="ruleanhui" packages="drools.anhui">
+        <ksession name="tag_anhui"/>
+    </kbase>
+</kmodule>

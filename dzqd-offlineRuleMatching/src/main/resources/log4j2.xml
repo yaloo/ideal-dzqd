@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="off">
+  <Properties>
+    <Property name="baseDir">logs</Property>
+  </Properties>
+  <Appenders>
+    <Console name="console-log" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+    </Console>
+    <RollingRandomAccessFile name="infoRollingFile" fileName="${baseDir}/info.log"
+      filePattern="${baseDir}/info-%d{yyyy-MM-dd}-%i.log.gz">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+      <Policies>
+        <!--
+        关键点在于 filePattern后的日期格式，以及TimeBasedTriggeringPolicy的interval，
+        日期格式精确到哪一位， interval也精确到哪一个单位
+        -->
+        <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+        <SizeBasedTriggeringPolicy size="550 MB" />
+      </Policies>
+      <Filters>
+        <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>
+        <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+      </Filters>
+    </RollingRandomAccessFile>
+    <RollingRandomAccessFile name="errFile" fileName="${baseDir}/err.log"
+      filePattern="${baseDir}/err-%d{yyyy-MM-dd}-%i.log.gz" >
+      <PatternLayout  charset="UTF-8" pattern="%d{yyyy-MM-dd HH:mm:ss} %-5level %t %C %M %L %m%n" />
+      <Filters>
+        <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+      </Filters>
+      <Policies>
+        <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+        <SizeBasedTriggeringPolicy size="550 MB" />
+      </Policies>
+    </RollingRandomAccessFile>
+  </Appenders>
+  <Loggers>
+    <Root level="info">
+      <appender-ref ref="console-log"/>
+    </Root>
+   <!-- <AsyncLogger name="com.ideal.dzqd.cdcp.modules.BusinessHandleThread" level="info" additivity="false">
+      <appender-ref ref="eventLogger" />
+    </AsyncLogger>-->
+  </Loggers>
+</configuration>
