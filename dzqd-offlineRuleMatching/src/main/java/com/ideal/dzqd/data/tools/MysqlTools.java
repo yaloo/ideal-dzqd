@@ -4,6 +4,7 @@ import com.alibaba.druid.pool.DruidPooledConnection;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.ideal.dzqd.data.po.SceneChannelSale;
+import com.ideal.dzqd.data.vo.SignEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +17,34 @@ import java.util.List;
  */
 public final class MysqlTools {
 
+  public static void saveSceneUser(SignEvent event, String table,String stat_date) throws SQLException {
+    //String table = "tm_mkt_scene_user_res_" + csss.getProvinceCode();
+
+    String sql = "INSERT INTO " + table
+        + "(stat_date,access_num,province_code,channel_id,sub_scene_id,sale_id,order_id,scene_id,scene_type_code) VALUES(?,?,?,?,?,?,?,?,?)";
+
+    DbPoolConnection dbp = DbPoolConnection.getInstance();
+    DruidPooledConnection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet rs = null;
+    try {
+      connection = dbp.getConnection();
+      preparedStatement = connection.prepareStatement(sql);
+      preparedStatement.setString(1, stat_date);
+      preparedStatement.setString(2, event.getPhone());
+      preparedStatement.setString(3, event.getProvinceCode());
+      preparedStatement.setString(4, event.getChannelId());
+      preparedStatement.setString(5, event.getSubSceneId());
+      preparedStatement.setString(6, event.getSaleId());
+      preparedStatement.setInt(7, event.getOrderId());
+      preparedStatement.setString(8,event.getSceneId());
+      preparedStatement.setString(9,event.getSceneTypeCode());
+
+      preparedStatement.execute();
+    } finally {
+      close(rs, preparedStatement, connection);
+    }
+  }
   /**
    * 获取规则对应子场景，销售品，渠道 等信息
    *
@@ -93,19 +122,23 @@ public final class MysqlTools {
   public static void createTable(String table) throws SQLException {
 
     StringBuffer buffer = new StringBuffer();
-    buffer.append("DROP TABLE IF EXISTS `").append(table).append("`;");
-    buffer.append("CREATE TABLE `").append(table).append("` (");
-    buffer.append("`id` INT(10) NOT NULL AUTO_INCREMENT,");
-    buffer.append("`stat_date` VARCHAR(8) DEFAULT NULL,");
-    buffer.append("`access_num` VARCHAR(50) DEFAULT NULL,");
-    buffer.append("`province_code` VARCHAR(2) DEFAULT NULL,");
-    buffer.append("`channel_id` VARCHAR(20) DEFAULT NULL,");
-    buffer.append("`sub_scene_id` VARCHAR(20) DEFAULT NULL,");
-    buffer.append("`sale_id` VARCHAR(50) DEFAULT NULL,");
-    buffer.append("`order_id` INT(10) DEFAULT NULL,");
-    buffer.append("PRIMARY KEY (`id`),");
-    buffer.append("KEY `phone` (`access_num`) USING HASH,");
-    buffer.append("KEY `NBR` (`sale_id`) USING HASH");
+    buffer.append("DROP TABLE IF EXISTS ").append(table).append(";");
+    buffer.append("CREATE TABLE ").append(table).append(" (");
+    buffer.append("id INT(10) NOT NULL AUTO_INCREMENT,");
+    buffer.append("stat_date VARCHAR(8) DEFAULT NULL,");
+    buffer.append("access_num VARCHAR(50) DEFAULT NULL,");
+    buffer.append("province_code VARCHAR(2) DEFAULT NULL,");
+    buffer.append("channel_id VARCHAR(20) DEFAULT NULL,");
+    buffer.append("sub_scene_id VARCHAR(20) DEFAULT NULL,");
+    buffer.append("sale_id VARCHAR(50) DEFAULT NULL,");
+    buffer.append("order_id INT(10) DEFAULT NULL,");
+
+    buffer.append("scene_id VARCHAR(20) DEFAULT NULL,");
+    buffer.append("scene_type_code VARCHAR(10) DEFAULT NULL,");
+
+    buffer.append("PRIMARY KEY (id),");
+    buffer.append("KEY phone (access_num) USING HASH,");
+    buffer.append("KEY NBR (sale_id) USING HASH");
     buffer.append(")  ENGINE=INNODB DEFAULT CHARSET=UTF8;");
 
     DbPoolConnection dbp = DbPoolConnection.getInstance();
@@ -153,4 +186,5 @@ public final class MysqlTools {
       e.printStackTrace();
     }
   }
+
 }

@@ -3,6 +3,7 @@ package com.ideal.dzqd.data.internal;
 import com.ideal.dzqd.data.po.SceneChannelSale;
 import com.ideal.dzqd.data.tools.MysqlTools;
 import com.ideal.dzqd.data.vo.AnhuiEvent;
+import com.ideal.dzqd.data.vo.DownloadEvent;
 import com.ideal.dzqd.data.vo.HunanEvent;
 import com.ideal.dzqd.data.vo.SignEvent;
 import com.lmax.disruptor.EventFactory;
@@ -15,11 +16,13 @@ import java.util.List;
  */
 public class SignEventFactory implements EventFactory<SignEvent> {
 
-  private String provinceCode;
-  List<SceneChannelSale> list;
+  private final String provinceCode;
+  private final DownloadEvent downloadEvent;
+  private final List<SceneChannelSale> list;
 
-  public SignEventFactory(String provinceCode) throws SQLException {
-    this.provinceCode = provinceCode;
+  public SignEventFactory(DownloadEvent downloadEvent) throws SQLException {
+    this.downloadEvent = downloadEvent;
+    provinceCode = downloadEvent.getProvinceCode();
     list = MysqlTools.getSceneChannelSales(provinceCode);
   }
 
@@ -34,6 +37,7 @@ public class SignEventFactory implements EventFactory<SignEvent> {
 
     if (event != null) {
       event.setProvinceCode(provinceCode);
+      event.setCycle(downloadEvent.getCycle());
     }
 
     event.setSceneChannelSales(list);

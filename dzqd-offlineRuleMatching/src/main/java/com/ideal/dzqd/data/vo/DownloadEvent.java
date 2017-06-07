@@ -16,7 +16,7 @@ public class DownloadEvent extends EventObject {
   private String remoteFileReg;
   // ftp文件路径
   private String remote_down_path;
-  private String localSavePath;
+  private String cycle;
 
   /**
    * Constructs a prototypical Event.
@@ -35,7 +35,7 @@ public class DownloadEvent extends EventObject {
   }
 
   public DownloadEvent(Object source, String provinceCode, String localPath, String ftpUser,
-      String ftpPwd, String remoteFileReg, String remote_down_path, String localSavePath) {
+      String ftpPwd, String remoteFileReg, String remote_down_path, String cycle) {
     super(source);
     this.provinceCode = provinceCode;
     this.localPath = localPath;
@@ -43,6 +43,7 @@ public class DownloadEvent extends EventObject {
     this.ftpPwd = ftpPwd;
     this.remoteFileReg = remoteFileReg;
     this.remote_down_path = remote_down_path;
+    this.cycle = cycle;
   }
 
   public String getProvinceCode() {
@@ -93,4 +94,11 @@ public class DownloadEvent extends EventObject {
     this.remote_down_path = remote_down_path;
   }
 
+  public String getCycle() {
+    return cycle;
+  }
+
+  public void setCycle(String cycle) {
+    this.cycle = cycle;
+  }
 }

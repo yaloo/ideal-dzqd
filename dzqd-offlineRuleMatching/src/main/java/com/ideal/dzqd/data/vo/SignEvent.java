@@ -23,6 +23,7 @@ public class SignEvent {
   private String phone;
   private String table;
 
+  private String cycle;//数据周期（天）
   private List<SceneChannelSale> sceneChannelSales;
   public SignEvent() {
   }
@@ -108,6 +109,14 @@ public class SignEvent {
 
   public void setTable(String table) {
     this.table = table;
+  }
+
+  public String getCycle() {
+    return cycle;
+  }
+
+  public void setCycle(String cycle) {
+    this.cycle = cycle;
   }
 
   public List<SceneChannelSale> getSceneChannelSales() {

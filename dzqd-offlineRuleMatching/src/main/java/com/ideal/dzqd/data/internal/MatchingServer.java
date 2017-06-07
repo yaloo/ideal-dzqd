@@ -137,7 +137,7 @@ public final class MatchingServer extends AbstractService {
       ExecutorService executor = Executors.newFixedThreadPool(4);
 
       Disruptor<SignEvent> disruptor = new Disruptor<>(
-          new SignEventFactory(event.getProvinceCode()), 1024, Executors.defaultThreadFactory());
+          new SignEventFactory(event), 1024, Executors.defaultThreadFactory());
 
       disruptor.handleEventsWith(droolHandler).then(inDBHandler);
       disruptor.start();//启动
