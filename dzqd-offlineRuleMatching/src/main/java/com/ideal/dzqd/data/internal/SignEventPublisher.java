@@ -47,6 +47,7 @@ public class SignEventPublisher  implements Runnable {
       InputStreamReader reader = new InputStreamReader(process.getInputStream());
       BufferedReader br = new BufferedReader(reader);
       String line;
+
       while ((line = br.readLine()) != null) {
         disruptor.publishEvent(new SignEventTranslator(line));
       }

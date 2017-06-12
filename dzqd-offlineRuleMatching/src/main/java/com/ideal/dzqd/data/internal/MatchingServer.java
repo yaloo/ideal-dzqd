@@ -12,7 +12,9 @@ import com.google.inject.Singleton;
 import com.ideal.dzqd.data.conf.AppConfig;
 import com.ideal.dzqd.data.vo.DownloadEvent;
 import com.ideal.dzqd.data.vo.SignEvent;
+import com.lmax.disruptor.YieldingWaitStrategy;
 import com.lmax.disruptor.dsl.Disruptor;
+import com.lmax.disruptor.dsl.ProducerType;
 import com.netflix.governator.guice.LifecycleInjector;
 import com.netflix.governator.lifecycle.LifecycleManager;
 import java.sql.SQLException;
@@ -133,11 +135,12 @@ public final class MatchingServer extends AbstractService {
       System.out.println(
           Joiner.on("\t").join("===download=====", event.getProvinceCode(), event.getLocalPath()));
 
-      int bufferSize = 1024;
-      ExecutorService executor = Executors.newFixedThreadPool(4);
+      int bufferSize = 4096;
+      ExecutorService executor = Executors.newCachedThreadPool();
 
       Disruptor<SignEvent> disruptor = new Disruptor<>(
-          new SignEventFactory(event), 1024, Executors.defaultThreadFactory());
+          new SignEventFactory(event), bufferSize, Executors.defaultThreadFactory(), ProducerType.MULTI,
+          new YieldingWaitStrategy());
 
       disruptor.handleEventsWith(droolHandler).then(inDBHandler);
       disruptor.start();//启动

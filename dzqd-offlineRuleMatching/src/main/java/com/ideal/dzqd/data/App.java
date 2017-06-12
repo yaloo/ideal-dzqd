@@ -15,7 +15,7 @@ public class App
     public static void main( String[] args )
     {
         String proviceCode = "13";
-        String date = "20170605";
+        String date = "20170606";
 
         /**
          * 命令行，传参
